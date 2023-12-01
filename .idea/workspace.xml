@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e193590-8b22-4ab5-85a8-d8ed83f5c562" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/BlogFastAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BlogFastAPI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4e63a709-28b7-4e96-b4f2-7a9e28328367.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4e63a709-28b7-4e96-b4f2-7a9e28328367.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/publications.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/publications.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/users.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pydantic_models/publication.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/pydantic_models/publication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pydantic_models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/pydantic_models/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +37,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/University/FastAPI/test",
+    "last_opened_file_path": "D:/University/BlogFastAPI",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -63,7 +60,11 @@
       <updated>1699599951946</updated>
       <workItem from="1699599953012" duration="4509000" />
       <workItem from="1700740754539" duration="1135000" />
-      <workItem from="1700806260662" duration="4340000" />
+      <workItem from="1700806260662" duration="6984000" />
+      <workItem from="1700814898470" duration="17000" />
+      <workItem from="1700815047963" duration="714000" />
+      <workItem from="1701021835943" duration="35000" />
+      <workItem from="1701411827325" duration="119000" />
     </task>
     <servers />
   </component>
