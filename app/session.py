@@ -6,7 +6,7 @@ engine = create_engine(
     f"@127.0.0.1:3306/blog_fastapi"
 )
 
-sync_session = sessionmaker(bind=engine, class_=Session, expire_on_commit=False, )
+sync_session = sessionmaker(bind=engine, class_=Session, expire_on_commit=False)
 
 
 class Base(DeclarativeBase):

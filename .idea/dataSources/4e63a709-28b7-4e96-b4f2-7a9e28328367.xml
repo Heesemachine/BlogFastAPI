@@ -1106,8 +1106,8 @@
       <CollationName>utf8_general_ci</CollationName>
     </schema>
     <schema id="325" parent="1" name="blog_fastapi">
-      <IntrospectionTimestamp>2023-11-24.11:44:56</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-11-24.07:44:56</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-12-14.20:29:18</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-12-14.16:29:18</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_general_ci</CollationName>
     </schema>
     <schema id="326" parent="1" name="crmsklad">
@@ -1241,140 +1241,156 @@
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="359" parent="343" name="user_id">
+    <column id="359" parent="343" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="360" parent="343" name="post_id">
+    <column id="360" parent="343" name="user_id">
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="361" parent="343" name="likes_ibfk_1">
+    <column id="361" parent="343" name="post_id">
+      <DasType>int(11)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="362" parent="343" name="likes_ibfk_1">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="362" parent="343" name="likes_ibfk_2">
+    <foreign-key id="363" parent="343" name="likes_ibfk_2">
       <ColNames>post_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>posts</RefTableName>
     </foreign-key>
-    <index id="363" parent="343" name="user_id">
+    <index id="364" parent="343" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="365" parent="343" name="user_id">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="364" parent="343" name="post_id">
+    <index id="366" parent="343" name="post_id">
       <ColNames>post_id</ColNames>
       <Type>btree</Type>
     </index>
-    <column id="365" parent="344" name="id">
+    <key id="367" parent="343" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="368" parent="344" name="id">
       <AutoIncrement>1</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="366" parent="344" name="user_id">
+    <column id="369" parent="344" name="user_id">
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="367" parent="344" name="title">
+    <column id="370" parent="344" name="title">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="368" parent="344" name="description">
+    <column id="371" parent="344" name="description">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="369" parent="344" name="likes">
+    <column id="372" parent="344" name="likes">
       <DasType>int(11)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="370" parent="344" name="comments">
+    <column id="373" parent="344" name="comments">
       <DasType>int(11)|0s</DasType>
       <Position>6</Position>
     </column>
-    <foreign-key id="371" parent="344" name="posts_ibfk_1">
+    <foreign-key id="374" parent="344" name="posts_ibfk_1">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <index id="372" parent="344" name="PRIMARY">
+    <index id="375" parent="344" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="373" parent="344" name="description">
+    <index id="376" parent="344" name="description">
       <ColNames>description</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="374" parent="344" name="user_id">
+    <index id="377" parent="344" name="user_id">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="375" parent="344" name="PRIMARY">
+    <key id="378" parent="344" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="376" parent="344" name="description">
+    <key id="379" parent="344" name="description">
       <UnderlyingIndexName>description</UnderlyingIndexName>
     </key>
-    <column id="377" parent="345" name="id">
-      <AutoIncrement>1</AutoIncrement>
+    <column id="380" parent="345" name="id">
+      <AutoIncrement>3</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="378" parent="345" name="name">
+    <column id="381" parent="345" name="username">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="379" parent="345" name="nickname">
+    <column id="382" parent="345" name="nickname">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="380" parent="345" name="email">
+    <column id="383" parent="345" name="email">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="381" parent="345" name="password">
+    <column id="384" parent="345" name="password">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <index id="382" parent="345" name="PRIMARY">
+    <index id="385" parent="345" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="383" parent="345" name="name">
-      <ColNames>name</ColNames>
+    <index id="386" parent="345" name="username">
+      <ColNames>username</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="384" parent="345" name="email">
+    <index id="387" parent="345" name="email">
       <ColNames>email</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="385" parent="345" name="PRIMARY">
+    <key id="388" parent="345" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="386" parent="345" name="name">
-      <UnderlyingIndexName>name</UnderlyingIndexName>
+    <key id="389" parent="345" name="username">
+      <UnderlyingIndexName>username</UnderlyingIndexName>
     </key>
-    <key id="387" parent="345" name="email">
+    <key id="390" parent="345" name="email">
       <UnderlyingIndexName>email</UnderlyingIndexName>
     </key>
   </database-model>

@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
-from session import Base
+from app.session import Base
 
 
 class Posts(Base):
@@ -21,7 +21,8 @@ class Comments(Base):
     post_id = Column(Integer, ForeignKey('posts.id'), nullable=False)
 
 class LikedPosts(Base):
-    __tablename__ = 'liked_posts'
+    __tablename__ = 'likes'
+    id = Column(Integer, primary_key=True)
 
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     post_id = Column(Integer, ForeignKey('posts.id'), nullable=False)

@@ -1,8 +1,8 @@
-"""create posts table
+"""create all_tables table
 
-Revision ID: 44023444bf88
-Revises: e9589bd7d619
-Create Date: 2023-11-24 09:07:38.254958
+Revision ID: e41b79f826ea
+Revises: 44023444bf88
+Create Date: 2023-12-14 20:35:53.939697
 
 """
 from typing import Sequence, Union
@@ -12,13 +12,22 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '44023444bf88'
-down_revision: Union[str, None] = 'e9589bd7d619'
+revision: str = 'e41b79f826ea'
+down_revision: Union[str, None] = '44023444bf88'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
+    op.create_table(
+        'users',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('name', sa.String(50), unique=True, nullable=False),
+        sa.Column('nickname', sa.String(50), nullable=False),
+        sa.Column('email', sa.String(255), unique=True, nullable=False),
+        sa.Column('password', sa.String(255), nullable=False),
+    )
+    
     op.create_table(
         'posts',
         sa.Column('id', sa.Integer, primary_key=True),
