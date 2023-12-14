@@ -100,6 +100,7 @@ async def create_comment(db_session: db_dependency, item:Comment, user: user_dep
 async def update_comment(id,post_id, item:Comment, db_session: db_dependency, user: user_dependency):
     user_id = user[1]
     post = db_session.query(Posts).filter(Posts.id == post_id).first()
+    user = db_session.query(Users).filter(Users.id == user_id).first()
     comment = db_session.query(Comments).filter(Comments.id == id).first()
     user = db_session.query(Users).filter(Users.id == user_id).first()
     if not post:
@@ -118,7 +119,7 @@ async def update_comment(id,post_id, item:Comment, db_session: db_dependency, us
     raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT, detail='You are a teapot')
 
 @post_router.delete('/delete_comment')
-async def delete_comment(id,post_id, db_session: db_dependency, user: user_dependency):
+async def delete_comment(id, post_id, db_session: db_dependency, user: user_dependency):
     user_id = user[1]
     post = db_session.query(Posts).filter(Posts.id == post_id).first()
     user = db_session.query(Users).filter(Users.id == user_id).first()
