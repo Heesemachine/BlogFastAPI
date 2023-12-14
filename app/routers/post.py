@@ -101,6 +101,7 @@ async def update_comment(id,post_id, item:Comment, db_session: db_dependency, us
     user_id = user[1]
     post = db_session.query(Posts).filter(Posts.id == post_id).first()
     comment = db_session.query(Comments).filter(Comments.id == id).first()
+    user = db_session.query(Users).filter(Users.id == user_id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No such post')
     
@@ -120,6 +121,7 @@ async def update_comment(id,post_id, item:Comment, db_session: db_dependency, us
 async def delete_comment(id,post_id, db_session: db_dependency, user: user_dependency):
     user_id = user[1]
     post = db_session.query(Posts).filter(Posts.id == post_id).first()
+    user = db_session.query(Users).filter(Users.id == user_id).first()
     comment = db_session.query(Comments).filter(Comments.id == id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No such comment')
@@ -129,4 +131,5 @@ async def delete_comment(id,post_id, db_session: db_dependency, user: user_depen
         db_session.query(Comments).filter(Comments.id == id).delete()
         db_session.commit()
         return post
+    raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT, detail='You are a teapot')
 
