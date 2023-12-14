@@ -1,12 +1,19 @@
 from pydantic import BaseModel
 
 class Post(BaseModel):
-    id: int
-    user_id: int
     title: str
     description: str
-    likes: int
-    comments: int
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "title": "Some title",
+                    "description": "Some description"
+                }
+            ]
+        }
+    }
 
 class Comment(BaseModel):
     id: int
@@ -14,6 +21,18 @@ class Comment(BaseModel):
     post_id: int
     description: str
 
-class LikedPosts(BaseModel):
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "description": "Very interesting comment"
+                }
+            ]
+        }
+    }
+
+class LikedPost(BaseModel):
+    id: int
+
     user_id: int
     post_id: int
