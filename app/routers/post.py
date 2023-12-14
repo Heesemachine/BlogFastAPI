@@ -9,14 +9,13 @@ from app.models.publications import Posts, Comments, LikedPosts
 from app.routers.auth import get_current_user
 
 from app.session import get_session
-
-from app.models.users import is_admin
+from app.models.users import Users
 
 post_router = APIRouter(prefix='/post', tags=['posts'])
 
 db_dependency = Annotated[Session, Depends(get_session)]
 user_dependency = Annotated[dict, Depends(get_current_user)]
-admin_dependency = Depends(is_admin)
+
 
 @post_router.get('/get_all')
 def get_posts(db_session: db_dependency):
@@ -42,27 +41,31 @@ async def create_post(db_session: db_dependency, item:Post, user: user_dependenc
 @post_router.put('/update_post')
 async def update_post(post_id, item:Post, db_session: db_dependency, user: user_dependency):
     user_id = user[1]
+    user = db_session.query(Users).filter(Users.id == user_id).first()
     post = db_session.query(Posts).filter(Posts.id == post_id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No such post')
-    if post.user_id != user_id:
-        raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT, detail='You are a teapot')
-    post.title = item.title
-    post.description = item.description
-    db_session.commit()
-    return post
+    if post.user_id == user_id or user.is_admin > 0:
+        post.title = item.title
+        post.description = item.description
+        db_session.commit()
+        return post
+    raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT, detail='You are a teapot')
+
 
 @post_router.delete('/delete_post')
 async def delete_post(post_id, db_session: db_dependency, user: user_dependency):
     user_id = user[1]
+    user = db_session.query(Users).filter(Users.id == user_id).first()
     post = db_session.query(Posts).filter(Posts.id == post_id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No such post')
-    if post.user_id != user_id:
-        raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT, detail='You are a teapot')
-    db_session.query(Posts).filter(Posts.id == post_id).delete()
-    db_session.commit()
-    return post
+    if post.user_id == user_id or user.is_admin > 0:
+        db_session.query(Posts).filter(Posts.id == post_id).delete()
+        db_session.commit()
+        return post
+    raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT, detail='You are a teapot')
+
 
 @post_router.post('/like_post')
 def like_post( post_id, db_session: db_dependency, user: user_dependency):
@@ -107,30 +110,23 @@ async def update_comment(id,post_id, item:Comment, db_session: db_dependency, us
     if comment.post_id != post.id:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No such comment in post')
     
-    if comment.user_id != user_id:
-        raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT, detail='You are a teapot')
-    comment.description = item.description
-    db_session.commit()
-    return comment
+    if comment.user_id == user_id or user.is_admin > 0:
+        comment.description = item.description
+        db_session.commit()
+        return comment
+    raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT, detail='You are a teapot')
 
 @post_router.delete('/delete_comment')
 async def delete_comment(id,post_id, db_session: db_dependency, user: user_dependency):
     user_id = user[1]
     post = db_session.query(Posts).filter(Posts.id == post_id).first()
+    comment = db_session.query(Comments).filter(Comments.id == id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No such comment')
-    if post.user_id != user_id:
-        raise HTTPException(status_code=status.HTTP_418_IM_A_TEAPOT, detail='You are a teapot')
-    db_session.query(Comments).filter(Comments.id == id).delete()
-    db_session.commit()
-    return post
+    if post.id != post_id:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No such comment in post')
+    if comment.user_id == user_id or user.is_admin > 0:
+        db_session.query(Comments).filter(Comments.id == id).delete()
+        db_session.commit()
+        return post
 
-
-# def create_comment(db_session, item:Comment, post_id, user_id):
-#     new_comment = Comments(description=item.description, user_id=user_id, post_id=post_id)
-#     post = get_post_by_id(db_session, post_id)
-#     post.comments += 1
-#     db_session.add(new_comment)
-#     db_session.commit()
-#     return new_comment
-#

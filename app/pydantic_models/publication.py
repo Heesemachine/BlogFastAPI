@@ -7,6 +7,16 @@ class Post(BaseModel):
 class Comment(BaseModel):
     description: str
 
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "description": "Very interesting comment"
+                }
+            ]
+        }
+    }
+
 class LikedPost(BaseModel):
     id: int
 
