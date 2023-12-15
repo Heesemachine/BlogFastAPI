@@ -1,6 +1,7 @@
 from typing import Annotated
 
 from fastapi import FastAPI, APIRouter, Depends, HTTPException
+import pymysql
 from sqlalchemy.orm import Session
 from starlette import status
 
@@ -16,11 +17,27 @@ post_router = APIRouter(prefix='/post', tags=['posts'])
 db_dependency = Annotated[Session, Depends(get_session)]
 user_dependency = Annotated[dict, Depends(get_current_user)]
 
+connection = pymysql.connect(
+    host='127.0.0.1',
+    port=3306,
+    user='root',
+    password='',
+    database='blog_fastapi',
+)
 
 @post_router.get('/get_all')
-def get_posts(db_session: db_dependency):
-    posts = db_session.query(Posts).all()
-    return posts
+def get_posts():
+    with connection.cursor() as cursor:
+        sql = f"""
+            SELECT * FROM `posts` WHERE 1;
+        """
+        cursor.execute(sql)
+        posts = cursor.fetchall()
+        connection.commit()
+        if posts is None:
+            return None
+        return posts
+
 
 @post_router.get('/get_by_id')
 def get_post_by_id(db_session: db_dependency, id):
